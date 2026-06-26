@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naivya's Diary</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#fdf3f6;
+    font-family:Quicksand,sans-serif;
+    color:#4d3d44;
+    background-image:
+    radial-gradient(#ffffff 1px, transparent 1px),
+    radial-gradient(#ffd9e8 1px, transparent 1px);
+    background-size:40px 40px;
+    overflow-x:hidden;
+}
+
+header{
+    text-align:center;
+    padding:60px 20px;
+}
+
+h1{
+    font-family:"Patrick Hand",cursive;
+    font-size:65px;
+    color:#ff7aa8;
+}
+
+.subtitle{
+    font-size:20px;
+    margin-top:10px;
+}
+
+nav{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:30px;
+}
+
+nav a{
+    text-decoration:none;
+    background:white;
+    padding:12px 18px;
+    border-radius:20px;
+    color:#ff6fa4;
+    box-shadow:0 5px 12px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+nav a:hover{
+    transform:translateY(-3px);
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    border-radius:25px;
+    padding:30px;
+    margin-bottom:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.card h2{
+    font-family:"Patrick Hand";
+    color:#ff79ad;
+    margin-bottom:15px;
+    font-size:40px;
+}
+
+.currently li{
+    margin:8px 0;
+}
+
+footer{
+    text-align:center;
+    padding:50px;
+    color:#777;
+}
+
+.sparkle{
+    position:fixed;
+    font-size:20px;
+    animation:fall linear infinite;
+    pointer-events:none;
+}
+
+@keyframes fall{
+0%{
+transform:translateY(-100px) rotate(0deg);
+opacity:0;
+}
+10%{
+opacity:1;
+}
+100%{
+transform:translateY(110vh) rotate(360deg);
+opacity:0;
+}
+}
+
+button{
+    background:#ff91b8;
+    border:none;
+    padding:10px 18px;
+    color:white;
+    border-radius:15px;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+button:hover{
+    background:#ff6da5;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>🍓 Naivya's Diary 🍓</h1>
+
+<p class="subtitle">
+A cozy little corner of the internet.
+</p>
+
+</header>
+
+<nav>
+
+<a href="#">Home</a>
+
+<a href="#">Blog</a>
+
+<a href="#">Recipes</a>
+
+<a href="#">Books</a>
+
+<a href="#">Movies</a>
+
+<a href="#">Guestbook</a>
+
+</nav>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Welcome!</h2>
+
+<p>
+
+Hi! I'm Naivya.
+
+This is my online diary where I write about baking, books, movies, life, and whatever happens to be on my mind.
+
+Grab a cookie and stay awhile. 🍪
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Currently...</h2>
+
+<ul class="currently">
+
+<li>🍞 Baking: Brioche Bread</li>
+
+<li>📖 Reading: Twilight</li>
+
+<li>🎬 Watching: Fairy tale movies</li>
+
+<li>🍪 Perfecting cookie recipes</li>
+
+<li>☁ Dreaming about visiting Tokyo</li>
+
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>Quote</h2>
+
+<p id="quote"></p>
+
+<button onclick="newQuote()">New Quote</button>
+
+</div>
+
+<div class="card">
+
+<h2>Latest Journal</h2>
+
+<h3>My First Brioche</h3>
+
+<p>
+
+Today I baked my first brioche buns completely from scratch and they tasted AMAZING.
+
+I'm officially obsessed with baking now.
+
+</p>
+
+</div>
+
+</div>
+
+<footer>
+
+Made with ♡ and lots of butter.
+
+</footer>
+
+<script>
+
+const quotes=[
+"Everything starts somewhere.",
+"Little moments become beautiful memories.",
+"Baking is edible happiness.",
+"The smallest joys matter.",
+"Take life one loaf at a time.",
+"Collect memories, not things.",
+"You deserve soft days."
+];
+
+function newQuote(){
+document.getElementById("quote").innerHTML=
+quotes[Math.floor(Math.random()*quotes.length)];
+}
+
+newQuote();
+
+function sparkle(){
+
+const s=document.createElement("div");
+
+s.className="sparkle";
+
+s.innerHTML=Math.random()>.5?"⭐":"🍓";
+
+s.style.left=Math.random()*100+"vw";
+
+s.style.animationDuration=(5+Math.random()*5)+"s";
+
+document.body.appendChild(s);
+
+setTimeout(()=>{
+
+s.remove();
+
+},10000);
+
+}
+
+setInterval(sparkle,400);
+
+</script>
+
+</body>
+</html>
