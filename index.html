@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Naivya's Diary</title>
+<title>Buttons and Batter</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 
@@ -12,6 +13,10 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
@@ -47,6 +52,12 @@ nav{
     gap:15px;
     flex-wrap:wrap;
     margin-bottom:30px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    padding:15px;
+    background:rgba(253,243,246,.9);
+    backdrop-filter:blur(10px);
 }
 
 nav a{
@@ -123,10 +134,33 @@ button{
     border-radius:15px;
     cursor:pointer;
     margin-top:15px;
+    transition:.3s;
 }
 
 button:hover{
     background:#ff6da5;
+}
+
+input{
+    padding:12px;
+    width:100%;
+    border-radius:15px;
+    border:1px solid #ddd;
+    margin-top:10px;
+    margin-bottom:10px;
+    font-family:inherit;
+}
+
+#guestMessages{
+    margin-top:15px;
+    list-style:none;
+}
+
+#guestMessages li{
+    padding:10px;
+    background:#fff4f8;
+    border-radius:12px;
+    margin-bottom:8px;
 }
 </style>
 </head>
@@ -134,106 +168,121 @@ button:hover{
 <body>
 
 <header>
-
 <h1>🍓 Naivya's Diary 🍓</h1>
 
 <p class="subtitle">
 A cozy little corner of the internet.
 </p>
-
 </header>
 
 <nav>
-
-<a href="#">Home</a>
-
-<a href="#">Blog</a>
-
-<a href="#">Recipes</a>
-
-<a href="#">Books</a>
-
-<a href="#">Movies</a>
-
-<a href="#">Guestbook</a>
-
+<a href="#home">Home</a>
+<a href="#blog">Blog</a>
+<a href="#recipes">Recipes</a>
+<a href="#books">Books</a>
+<a href="#movies">Movies</a>
+<a href="#guestbook">Guestbook</a>
 </nav>
 
 <div class="container">
 
-<div class="card">
-
+<div class="card" id="home">
 <h2>Welcome!</h2>
 
 <p>
-
 Hi! I'm Naivya.
-
-This is my online diary where I write about baking, books, movies, life, and whatever happens to be on my mind.
-
+This is my online diary where I write about baking, books, movies, life,
+and whatever happens to be on my mind.
 Grab a cookie and stay awhile. 🍪
-
 </p>
-
 </div>
 
 <div class="card">
-
 <h2>Currently...</h2>
 
 <ul class="currently">
-
 <li>🍞 Baking: Brioche Bread</li>
-
 <li>📖 Reading: Twilight</li>
-
 <li>🎬 Watching: Fairy tale movies</li>
-
 <li>🍪 Perfecting cookie recipes</li>
-
 <li>☁ Dreaming about visiting Tokyo</li>
-
 </ul>
-
 </div>
 
 <div class="card">
-
-<h2>Quote</h2>
+<h2>Quote of the Day</h2>
 
 <p id="quote"></p>
 
-<button onclick="newQuote()">New Quote</button>
-
+<button onclick="newQuote()">✨ New Quote</button>
 </div>
 
-<div class="card">
-
+<div class="card" id="blog">
 <h2>Latest Journal</h2>
 
 <h3>My First Brioche</h3>
 
 <p>
-
 Today I baked my first brioche buns completely from scratch and they tasted AMAZING.
-
 I'm officially obsessed with baking now.
-
 </p>
+</div>
 
+<div class="card" id="recipes">
+<h2>Recipes</h2>
+
+<p>
+🍓 Strawberry Shortcake<br><br>
+🍪 Chocolate Chip Cookies<br><br>
+🥐 Brioche Bread
+</p>
+</div>
+
+<div class="card" id="books">
+<h2>Bookshelf</h2>
+
+<p>
+📖 Twilight<br><br>
+📚 Anne of Green Gables<br><br>
+🌸 Little Women
+</p>
+</div>
+
+<div class="card" id="movies">
+<h2>Favorite Movies</h2>
+
+<p>
+🎬 Pan's Labyrinth<br><br>
+🧚 Fairy tale classics<br><br>
+✨ Studio Ghibli films
+</p>
+</div>
+
+<div class="card" id="guestbook">
+<h2>Guestbook</h2>
+
+<p>Leave a sweet note! 💌</p>
+
+<input
+type="text"
+id="guestInput"
+placeholder="Write a message..."
+>
+
+<button onclick="addMessage()">Sign Guestbook</button>
+
+<ul id="guestMessages"></ul>
 </div>
 
 </div>
 
 <footer>
-
 Made with ♡ and lots of butter.
-
 </footer>
 
 <script>
 
-const quotes=[
+const quotes = [
 "Everything starts somewhere.",
 "Little moments become beautiful memories.",
 "Baking is edible happiness.",
@@ -243,33 +292,46 @@ const quotes=[
 "You deserve soft days."
 ];
 
-function newQuote(){
-document.getElementById("quote").innerHTML=
-quotes[Math.floor(Math.random()*quotes.length)];
+function newQuote() {
+    const quoteElement = document.getElementById("quote");
+
+    if (quoteElement) {
+        quoteElement.textContent =
+            quotes[Math.floor(Math.random() * quotes.length)];
+    }
 }
 
 newQuote();
 
+function addMessage() {
+    const input = document.getElementById("guestInput");
+    const list = document.getElementById("guestMessages");
+
+    if (input.value.trim() !== "") {
+        const li = document.createElement("li");
+        li.textContent = "💌 " + input.value;
+        list.appendChild(li);
+        input.value = "";
+    }
+}
+
 function sparkle(){
 
-const s=document.createElement("div");
+const s = document.createElement("div");
 
-s.className="sparkle";
+s.className = "sparkle";
 
-s.innerHTML=Math.random()>.5?"⭐":"🍓";
+s.innerHTML = Math.random() > .5 ? "⭐" : "🍓";
 
-s.style.left=Math.random()*100+"vw";
+s.style.left = Math.random() * 100 + "vw";
 
-s.style.animationDuration=(5+Math.random()*5)+"s";
+s.style.animationDuration = (5 + Math.random() * 5) + "s";
 
 document.body.appendChild(s);
 
-setTimeout(()=>{
-
-s.remove();
-
+setTimeout(() => {
+    s.remove();
 },10000);
-
 }
 
 setInterval(sparkle,400);
@@ -278,3 +340,4 @@ setInterval(sparkle,400);
 
 </body>
 </html>
+```
